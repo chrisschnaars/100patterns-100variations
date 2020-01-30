@@ -1,0 +1,42 @@
+
+// ARC START POINTS
+float[] startAngles = { 0, 90, 180, 270 };
+
+
+// DRAW ARC
+arc(xpos, ypos, w, h, startAngles[c2], (startAngles[c2]+180));
+
+
+
+
+
+    // SHAPE CONFIG 3: ARC + RECTANGLE
+    if (c1 == 2) {
+
+      // ARC SETTINGS
+      xpos = w/2;
+      ypos = h/2;
+
+      // NORTH FACING
+      if (c2 == 0) {
+        rect(0, 0, w, h/2);
+      }
+
+      // EAST FACING
+      if (c2 == 1) {
+        rect(w/2, 0, w/2, h);
+      }
+
+      // SOUTH FACING
+      if (c2 == 2) {
+        rect(0, h/2, w, h/2);
+      }
+
+      // WEST FACING
+      if (c2 == 3) {
+        rect(0, 0, w/2, h);
+      }
+
+      // DRAW ARC
+      arc(xpos, ypos, w, h, radians(startAngles[c2]), radians((startAngles[c2]+180)));
+    }
