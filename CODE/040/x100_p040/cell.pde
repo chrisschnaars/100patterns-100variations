@@ -20,7 +20,7 @@ class Cell {
 
     // Shpae Combination
     // Options: two arcs, arc + accs, arc + lines
-    int s1 = floor(random(0, 3));
+    int s1 = floor(random(0, 4));
 
     // Shape Rotation
     int r1 = floor(random(0, 4));
@@ -39,8 +39,10 @@ class Cell {
   void render(float d1, int s1, int r1, int c1, int c2) {
     // BEGIN DRAWING
     pushMatrix();
-    translate(x, y);
-    strokeWeight(2);
+    translate(x + w/2, y + h/2);
+
+    // SETTINGS
+    strokeWeight(4);
 
     // BACKGROUND CELL BORDER FOR DEBUGGING
     boolean drawBG = false;
@@ -50,99 +52,33 @@ class Cell {
       rect(x, y, w, h);
     }
 
-    // Draw Shape
+    noFill();
+    stroke(shapeColors[c1]);
+    rotate(radians(r1 * 90));
+
     if (s1 == 0) {
-      drawArcs(2, c1, r1, 1);
+      stroke(shapeColors[c2]);
+      line(-w/2, 0, w/2, 0);
+      stroke(shapeColors[c1]);
+      arc(0, -w/2, w, h*2, radians(0), radians(180), PIE);
     } else if (s1 == 1) {
-      drawArcLines(c2, 0);
-      drawArcs(1, c1, 0, 0);
-    } else {
-      drawArcs(1, c1, r1, 1);
-      drawLines(c2, r1);
+      arc(-w/4, -w/2, w/2, h*2, radians(0), radians(180), PIE);
+      arc(w/4, -w/2, w/2, h*2, radians(0), radians(180), PIE);
+    } else if (s1 == 2) {
+      stroke(shapeColors[c2]);
+      ellipse(0, 0, w/2, h/2);
+      stroke(shapeColors[c1]);
+      bezier(-w/2, -h/2, -w/2, h/2, 0, h/2, 0, -h/2);
+      bezier(0, h/2, 0, -h/2, w/2, -h/2, w/2, h/2);
+    } else if (s1 == 3) {
+      fill(shapeColors[c1]);
+      arc(-w/2, -h/2, w*2, h*2, radians(0), radians(90), PIE);
+      // noFill();
+      // stroke(shapeColors[c2]);
+      // line(-w/2, -h/2, w/2, h/2);
     }
 
     // END DRAWING
     popMatrix();
-  }
-
-  void drawLines(int c, int r) {
-    int numLines = 3;
-    float lineSpacer = (h/2) / numLines;
-
-    for (int i = 0; i < numLines; i++) {
-      pushMatrix();
-      translate(w/2, h/2);
-      noFill();
-      stroke(shapeColors[c]);
-
-      float yP = lineSpacer/2 + (i * lineSpacer);
-
-      float t = 90 * r;
-      rotate(radians(t));
-
-      line(-w/2, yP, w/2, yP);
-
-      popMatrix();
-    }
-  }
-
-  void drawArcLines(int c, int r) {
-    int numArcs = 3;
-    float spacer = (h/2) / numArcs;
-
-    for (int i = 0; i < numArcs; i++) {
-      pushMatrix();
-      translate(w/2, h/2);
-      noFill();
-      stroke(shapeColors[c]);
-
-      float arcWMin = w * 0.45;
-      float arcWMax = w * 1;
-      // float arcSizer = (arcWMax - arcWMin) / numArcs;
-      // float arcSize = arcWMin + (i * arcSizer);
-      float arcSize = map(i, 0, numArcs - 1, arcWMin, arcWMax);
-
-      float t = 90 * r;
-      rotate(radians(t));
-
-      arc(0, 0, arcSize, arcSize, radians(180), radians(360));
-
-      popMatrix();
-    }
-
-    // pushMatrix();
-    // noStroke();
-    // fill(bgColor);
-    //
-    // rect(0, h/2, w, -0.1 * h);
-    // popMatrix();
-  }
-
-  void drawArcs(int n, int c, int r, int type) {
-    int numArcs = n;
-    float arcH = h/2;
-
-    for (int i = 0; i < numArcs; i++) {
-      pushMatrix();
-      translate(w/2, h/2);
-
-      float style = random(0, 10);
-      if (style > 5) {
-        noStroke();
-        fill(shapeColors[c]);
-      } else {
-        noFill();
-        stroke(shapeColors[c]);
-      }
-
-      float yP = (-h/2 * type) + (i * arcH);
-
-      float t = 90 * r;
-      rotate(radians(t));
-
-      arc(0, yP, w, h, radians(0), radians(180), PIE);
-
-      popMatrix();
-    }
   }
 }

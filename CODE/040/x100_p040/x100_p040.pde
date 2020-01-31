@@ -2,16 +2,16 @@
 // Chris Schnaars
 
 // DOCUMENT SETTINGS
-String patternNumber = "039";
+String patternNumber = "040";
 int version = 1;
 int iteration = 1;
-int totalCount = 100;
+int totalCount = 1;
 
 // PDF EXPORT LIBRARY
 import processing.pdf.*;
 
 // CAPTURE SETTINGS
-boolean capture = true;
+boolean capture = false;
 boolean monochromatic = false; // SET TO TRUE FOR JUST B&W
 
 // CELLS ARRAY
