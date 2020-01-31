@@ -19,7 +19,6 @@ class Cell {
     float d1 = random(0, 1);
 
     // Shpae Combination
-    // Options: two arcs, arc + accs, arc + lines
     int s1 = floor(random(0, 4));
 
     // Shape Rotation
@@ -73,9 +72,6 @@ class Cell {
     } else if (s1 == 3) {
       fill(shapeColors[c1]);
       arc(-w/2, -h/2, w*2, h*2, radians(0), radians(90), PIE);
-      // noFill();
-      // stroke(shapeColors[c2]);
-      // line(-w/2, -h/2, w/2, h/2);
     }
 
     // END DRAWING
